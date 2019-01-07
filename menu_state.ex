@@ -10,12 +10,12 @@ defmodule Menuprocess do
   
   def menu_state(state) do
     receive do
-      {sender, items} ->
-        send sender, state
+      {caller, items} ->
+        send caller, state
         menu_state(state)
-      {sender, :additems, item} ->
+      {caller, :additems, item} ->
         new_state = [item | state]
-        send sender, value new_state
+        send caller, value new_state
         menu_state(new_state)
     _error ->
        IO.puts "Couldn't update the menu"
