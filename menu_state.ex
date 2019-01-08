@@ -22,7 +22,7 @@ defmodule Menuprocess do
   @spec menu_state(tuple(), pid()) :: {:ok, list(String.t())}
   def menu_state(state) do
     receive do
-      {caller, items} ->
+      {caller, :items} ->
         send caller, state
         menu_state(state)
       {caller, :additems, item} ->
