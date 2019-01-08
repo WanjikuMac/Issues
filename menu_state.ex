@@ -41,7 +41,7 @@ defmodule Menuprocess do
     This function returns a list of all the current items in the system 
     """
     @spec all() :: {:ok, list(String.t())}
-    def all_items do 
+    def all do 
       send :process, {self(), :items}
         receive do state -> inspect state end
     end
