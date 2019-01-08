@@ -30,7 +30,7 @@ defmodule Menuprocess do
         send caller, new_state
         menu_state(new_state)
     _error ->
-       IO.puts "Couldn't update the menu"
+       IO.puts "Wrong entry"
        menu_state(state)
        end
      end
