@@ -19,7 +19,7 @@ defmodule Menuprocess do
    -`caller`- sender of the request
    -`item` - current state of the server
   """
-  @spec menu_state(tuple(), pid()) :: {atom(), tuple(), list(String.t())}
+  @spec menu_state(tuple(), pid()) :: {:ok, list(String.t())}
   def menu_state(state) do
     receive do
       {caller, items} ->
@@ -31,7 +31,7 @@ defmodule Menuprocess do
         menu_state(new_state)
     _error ->
        IO.puts "Couldn't update the menu"
-       menu_item(state)
+       menu_state(state)
        end
      end
      
@@ -40,7 +40,7 @@ defmodule Menuprocess do
     @doc """
     This function returns a list of all the current items in the system 
     """
-    @spec all_items() :: {:ok, list(String.t())}
+    @spec all() :: {:ok, list(String.t())}
     def all_items do 
       send :process, {self(), :items}
         receive do state -> inspect state end
@@ -55,6 +55,3 @@ defmodule Menuprocess do
         receive do response -> inspect response end
     end
   end
-      
-      
-        
