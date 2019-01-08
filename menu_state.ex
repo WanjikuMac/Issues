@@ -1,6 +1,6 @@
 defmodule Menuprocess do
   
-  #serverProcess
+  #menu server
   @doc"""
   This function initializes our server 
   """
@@ -27,7 +27,7 @@ defmodule Menuprocess do
         menu_state(state)
       {caller, :additems, item} ->
         new_state = [item | state]
-        send caller, new_state
+        send caller, length new_state
         menu_state(new_state)
     _error ->
        IO.puts "Wrong entry"
@@ -36,7 +36,7 @@ defmodule Menuprocess do
      end
      
      
-     #client process
+     #client server
     @doc """
     This function returns a list of all the current items in the system 
     """
